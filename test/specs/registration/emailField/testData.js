@@ -1,0 +1,18 @@
+export const INVALID_EMAILS = [
+    '#@%^%#$@#$@#.com',
+    'address',
+    '@domain.com',
+    '\\<email@domain.com>',
+    'email.domain.com',
+    'email@domain@domain.com',
+    '.email@domain.com',
+    'email.@domain.com',
+    'email..email@domain.com',
+    'あいうえお@domain.com',
+    'email@domain.com (Joe Smith)',
+    'email@domain',
+    'email@-domain.com',
+    'email@domain.web',
+    'email@111.222.333.44444',
+    'email@domain..com',
+];
