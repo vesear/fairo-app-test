@@ -2,12 +2,12 @@ import { expect } from 'chai';
 import { faker } from '@faker-js/faker';
 import MailosaurClient from 'mailosaur';
 
-import { RegistrationPage } from '../pageobjects/signUp/registrationPage.js';
-import { OtpPage } from '../pageobjects/signup/otpPage.js';
-import { CreatePasswordPage } from '../pageobjects/signup/createPasswordPage.js';
-import { InvoicesPage } from '../pageobjects/signup/invoicesPage.js';
-import { extractNumberFromString } from '../utils/extractNumberFromString.js';
-import { MAILOSAUR, APP_URL } from '../config.js';
+import { RegistrationPage } from '../../pageobjects/signup/registrationPage/registrationPage.js';
+import { OtpPage } from '../../pageobjects/signup/otpPage.js';
+import { CreatePasswordPage } from '../../pageobjects/signup/createPasswordPage.js';
+import { InvoicesPage } from '../../pageobjects/signup/invoicesPage.js';
+import { extractNumberFromString } from '../../utils/extractNumberFromString.js';
+import { MAILOSAUR, APP_URL } from '../../config.js';
 
 const { API_KEY, SERVER_ID, DOMAIN } = MAILOSAUR;
 const mailosaur = new MailosaurClient(API_KEY);
