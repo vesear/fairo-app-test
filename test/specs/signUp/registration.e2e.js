@@ -6,10 +6,10 @@ import { OtpPage } from '../../pageobjects/signup/otpPage.js';
 import { CreatePasswordPage } from '../../pageobjects/signup/createPasswordPage.js';
 import { InvoicesPage } from '../../pageobjects/signup/invoicesPage.js';
 import { extractNumberFromString } from '../../utils/extractNumberFromString.js';
-import { MAILOSAUR, APP_URL } from '../../constants/config.js';
 import { cookMailosaurEmail } from '../../utils/cookEmail.js';
 import { fakeGenerator } from '../../services/fakeGenerator.js';
 import { ENDPOINTS } from '../../constants/endpoints.js';
+import { MAILOSAUR, APP_URL } from '../../constants/config.js';
 
 const { API_KEY, SERVER_ID } = MAILOSAUR;
 const mailosaur = new MailosaurClient(API_KEY);

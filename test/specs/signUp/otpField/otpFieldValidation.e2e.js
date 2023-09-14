@@ -1,14 +1,15 @@
 import { expect } from 'chai';
+
 import { RegistrationPage } from '../../../pageobjects/signup/registrationPage/registrationPage.js';
 import { OtpPage } from '../../../pageobjects/signup/otpPage.js';
+import { cookMailosaurEmail } from '../../../utils/cookEmail.js';
 
 import {
     OTP_EMPTY_ERROR_MESSAGE,
     OTP_INCORRECT_ERROR_MESSAGE,
 } from '../../../pageobjects/signup/registrationPage/constants.js';
-import { cookMailosaurEmail } from '../../../utils/cookEmail.js';
 
-const OTP_CODE = '1111';
+const INVALID_OTP_CODE = '1111';
 
 const email = cookMailosaurEmail();
 
@@ -23,7 +24,7 @@ describe('OTP validation ', () => {
         await RegistrationPage.enterEmail(email);
         expect(await OtpPage.isOpened()).to.be.true;
 
-        await browser.keys(OTP_CODE);
+        await browser.keys(INVALID_OTP_CODE);
         await OtpPage.clickContinue();
 
         expect(await OtpPage.getOtpErrorMessage()).to.be.eql(OTP_INCORRECT_ERROR_MESSAGE);
