@@ -10,7 +10,7 @@ import itParam from 'mocha-param';
 
 describe('Email field validation', () => {
     itParam(`should has error message when value is invalid `, INVALID_EMAILS, async email => {
-        await browser.url('sign-up');
+        await RegistrationPage.open();
         expect(await RegistrationPage.isOpened()).to.be.true;
 
         await RegistrationPage.enterEmail(email);
@@ -21,7 +21,7 @@ describe('Email field validation', () => {
     });
 
     it('should has error message when value is empty', async () => {
-        await browser.url('sign-up');
+        await RegistrationPage.open();
         expect(await RegistrationPage.isOpened()).to.be.true;
 
         await RegistrationPage.enterEmail('');

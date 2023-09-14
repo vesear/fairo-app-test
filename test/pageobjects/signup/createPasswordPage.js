@@ -6,7 +6,7 @@ const SELECTORS = {
     CONTINUE_BUTTON: "//button[@type='submit']", // TODO: Move to shared components
 };
 
-const enterPassword = async (password, repeatPassword) => {
+const enterPassword = async ({ password, repeatPassword }) => {
     await $(SELECTORS.PASSWORD_INPUT).setValue(password);
     await $(SELECTORS.REPEAT_PASSWORD_INPUT).setValue(repeatPassword);
     await $(SELECTORS.CONTINUE_BUTTON).click();
