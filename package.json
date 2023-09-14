@@ -11,5 +11,11 @@
   },
   "scripts": {
     "wdio": "wdio run ./wdio.conf.js"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "chai": "^4.3.8",
+    "dotenv": "^16.3.1",
+    "mailosaur": "^8.6.1"
   }
 }
