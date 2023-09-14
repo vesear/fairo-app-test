@@ -1,4 +1,5 @@
-import { isPageOpened } from '../../basePage.js';
+import { isPageOpened, openPage } from '../../basePage.js';
+import { ENDPOINTS } from '../../../constants/endpoints.js';
 
 const SELECTORS = {
     EMAIL_INPUT: '//input[@name="email"]',
@@ -15,7 +16,8 @@ const enterEmail = async email => {
 const getEmailErrorMessage = async () => $(SELECTORS.EMAIL_INPUT_ERROR_MESSAGE).getText();
 
 export const RegistrationPage = {
-    isOpened: () => isPageOpened('Registration', SELECTORS.SIGN_IN_BUTTON),
     enterEmail,
     getEmailErrorMessage,
+    open: () => openPage(ENDPOINTS.SIGNUP),
+    isOpened: () => isPageOpened('Registration', SELECTORS.SIGN_IN_BUTTON),
 };

@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { faker } from '@faker-js/faker';
 import MailosaurClient from 'mailosaur';
 
 import { RegistrationPage } from '../../pageobjects/signup/registrationPage/registrationPage.js';
@@ -7,18 +6,20 @@ import { OtpPage } from '../../pageobjects/signup/otpPage.js';
 import { CreatePasswordPage } from '../../pageobjects/signup/createPasswordPage.js';
 import { InvoicesPage } from '../../pageobjects/signup/invoicesPage.js';
 import { extractNumberFromString } from '../../utils/extractNumberFromString.js';
-import { MAILOSAUR, APP_URL } from '../../config.js';
+import { MAILOSAUR, APP_URL } from '../../constants/config.js';
+import { cookMailosaurEmail } from '../../utils/cookEmail.js';
+import { fakeGenerator } from '../../services/fakeGenerator.js';
+import { ENDPOINTS } from '../../constants/endpoints.js';
 
-const { API_KEY, SERVER_ID, DOMAIN } = MAILOSAUR;
+const { API_KEY, SERVER_ID } = MAILOSAUR;
 const mailosaur = new MailosaurClient(API_KEY);
 
-const username = faker.internet.displayName();
-const password = faker.internet.password();
-const email = `${username}@${SERVER_ID}.${DOMAIN}`;
+const password = fakeGenerator.password();
+const email = cookMailosaurEmail();
 
 describe('Registration', () => {
     it('should register a new user', async () => {
-        await browser.url('sign-up');
+        await RegistrationPage.open();
         expect(await RegistrationPage.isOpened()).to.be.true;
 
         await RegistrationPage.enterEmail(email);
@@ -30,11 +31,14 @@ describe('Registration', () => {
         await OtpPage.clickContinue();
         expect(await CreatePasswordPage.isOpened()).to.be.true;
 
-        await CreatePasswordPage.enterPassword(password, password);
+        await CreatePasswordPage.enterPassword({ password, repeatPassword: password });
+
+        // DEV_NOTE: Need to wait until modal is displayed. Can be added smart
+        //           waiter in future
         await browser.pause(3000);
 
         expect(await InvoicesPage.isOpened()).to.be.true;
         const currentPageUrl = await browser.getUrl();
-        expect(currentPageUrl).to.eql(`${APP_URL}invoices`);
+        expect(currentPageUrl).to.eql(`${APP_URL}${ENDPOINTS.INVOICES}`);
     });
 });
