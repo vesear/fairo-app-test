@@ -13,7 +13,7 @@ const INVALID_OTP_CODE = '1111';
 
 const email = cookMailosaurEmail();
 
-describe('OTP validation ', () => {
+describe('OTP validation ', async () => {
     beforeEach(async () => {
         await RegistrationPage.open();
     });
@@ -30,7 +30,7 @@ describe('OTP validation ', () => {
         expect(await OtpPage.getOtpErrorMessage()).to.be.eql(OTP_INCORRECT_ERROR_MESSAGE);
     });
 
-    it('should has error message when OTP code not entered ', async () => {
+    it('should has error message when OTP code not entered', async () => {
         expect(await RegistrationPage.isOpened()).to.be.true;
 
         await RegistrationPage.enterEmail(email);
