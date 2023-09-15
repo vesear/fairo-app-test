@@ -10,6 +10,9 @@ import { cookMailosaurEmail } from '../../utils/cookEmail.js';
 import { fakeGenerator } from '../../services/fakeGenerator.js';
 import { ENDPOINTS } from '../../constants/endpoints.js';
 import { MAILOSAUR, APP_URL } from '../../constants/config.js';
+import { PROFILE_MENU_ITEMS } from '../../components/ProfileMenu/constants.js';
+import { inputWithValidation } from '../../components/inputWithValidation.js';
+import { DUPLICATE_EMAIL_ERROR_MESSAGE } from '../../pageobjects/signup/registrationPage/constants.js';
 
 const { API_KEY, SERVER_ID } = MAILOSAUR;
 const mailosaur = new MailosaurClient(API_KEY);
@@ -17,7 +20,7 @@ const mailosaur = new MailosaurClient(API_KEY);
 const password = fakeGenerator.password();
 const email = cookMailosaurEmail();
 
-describe('Registration', () => {
+describe('Registration ', async () => {
     it('should register a new user', async () => {
         await RegistrationPage.open();
         expect(await RegistrationPage.isOpened()).to.be.true;
@@ -40,5 +43,18 @@ describe('Registration', () => {
         expect(await InvoicesPage.isOpened()).to.be.true;
         const currentPageUrl = await browser.getUrl();
         expect(currentPageUrl).to.eql(`${APP_URL}${ENDPOINTS.INVOICES}`);
+    });
+
+    it('should not register a existing user', async () => {
+        await InvoicesPage.closeModal();
+        await InvoicesPage.ProfileMenu.selectItem(PROFILE_MENU_ITEMS.SIGN_OUT);
+        await InvoicesPage.confirmSignOut();
+
+        expect(await RegistrationPage.isOpened()).to.be.true;
+
+        await RegistrationPage.enterEmail(email);
+
+        const actualErrorMessage = await inputWithValidation({ name: 'email' }).getError();
+        expect(actualErrorMessage).to.be.eql(DUPLICATE_EMAIL_ERROR_MESSAGE);
     });
 });

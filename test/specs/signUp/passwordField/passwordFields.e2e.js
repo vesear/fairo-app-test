@@ -10,11 +10,12 @@ import { extractNumberFromString } from '../../../utils/extractNumberFromString.
 
 import { MAILOSAUR } from '../../../constants/config.js';
 import { TEST_DATA } from './testData.js';
+import { inputWithValidation } from '../../../components/inputWithValidation.js';
 
 const { API_KEY, SERVER_ID } = MAILOSAUR;
 const mailosaur = new MailosaurClient(API_KEY);
 
-describe('Password/Repeat Password field only', () => {
+describe('Password/Repeat Password field ', async () => {
     itParam(
         'should has error message when data is incorrect/not entered',
         TEST_DATA,
@@ -33,7 +34,7 @@ describe('Password/Repeat Password field only', () => {
             await validatePasswordPageOpened();
 
             await CreatePasswordPage.enterPassword({ password, repeatPassword });
-            expect(await CreatePasswordPage.getInputErrorMessage(inputName)).to.be.eql(
+            expect(await inputWithValidation({ name: inputName }).getError()).to.be.eql(
                 errorMessage
             );
             await validatePasswordPageOpened();
