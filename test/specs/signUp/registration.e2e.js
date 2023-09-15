@@ -20,8 +20,8 @@ const mailosaur = new MailosaurClient(API_KEY);
 const password = fakeGenerator.password();
 const email = cookMailosaurEmail();
 
-describe('Registration ', async () => {
-    it('should register a new user', async () => {
+describe('Registration.', async () => {
+    it('should register a new user. https://app.qase.io/case/FTP-1', async () => {
         await RegistrationPage.open();
         expect(await RegistrationPage.isOpened()).to.be.true;
 
@@ -45,7 +45,7 @@ describe('Registration ', async () => {
         expect(currentPageUrl).to.eql(`${APP_URL}${ENDPOINTS.INVOICES}`);
     });
 
-    it('should not register a existing user', async () => {
+    it('should not register a existing user. https://app.qase.io/case/FTP-4', async () => {
         await InvoicesPage.closeModal();
         await InvoicesPage.ProfileMenu.selectItem(PROFILE_MENU_ITEMS.SIGN_OUT);
         await InvoicesPage.confirmSignOut();

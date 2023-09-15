@@ -15,7 +15,7 @@ import { inputWithValidation } from '../../../components/inputWithValidation.js'
 const { API_KEY, SERVER_ID } = MAILOSAUR;
 const mailosaur = new MailosaurClient(API_KEY);
 
-describe('Password/Repeat Password field ', async () => {
+describe('Password/Repeat Password field. https://app.qase.io/case/FTP-5', async () => {
     itParam(
         'should has error message when data is incorrect/not entered',
         TEST_DATA,
