@@ -11,7 +11,7 @@ import {
 import { INVALID_EMAILS } from './testData.js';
 import { inputWithValidation } from '../../../components/inputWithValidation.js';
 
-describe('Email field validation', async () => {
+describe('Email field validation. https://app.qase.io/case/FTP-2', async () => {
     itParam('should has error message when value is invalid', INVALID_EMAILS, async email => {
         await RegistrationPage.open();
         expect(await RegistrationPage.isOpened()).to.be.true;

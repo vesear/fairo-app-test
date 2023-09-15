@@ -13,12 +13,12 @@ const INVALID_OTP_CODE = '1111';
 
 const email = cookMailosaurEmail();
 
-describe('OTP validation ', async () => {
+describe('OTP validation. https://app.qase.io/case/FTP-3', async () => {
     beforeEach(async () => {
         await RegistrationPage.open();
     });
 
-    it('should has error message when OTP code is invalid ', async () => {
+    it('should has error message when OTP code is invalid', async () => {
         expect(await RegistrationPage.isOpened()).to.be.true;
 
         await RegistrationPage.enterEmail(email);
